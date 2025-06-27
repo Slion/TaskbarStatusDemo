@@ -1,0 +1,35 @@
+#include "resource.h"
+
+IDI_APP                 ICON                    "PeripheralStatus.ico"
+IDI_OVERLAY1            ICON                    "overlay1.ico"
+IDI_OVERLAY2            ICON                    "overlay2.ico"
+
+IDC_PERIPHERALSTATUS MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "Status"
+    BEGIN
+        MENUITEM "Overlay &1",                  IDM_OVERLAY1
+        MENUITEM "Overlay &2",                  IDM_OVERLAY2
+        MENUITEM "&Clear Overlay",              IDM_OVERLAY_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "Progress simulation",         IDM_SIMULATEPROGRESS
+        MENUITEM "Simulation pause",            IDM_PROGRESS_STOP
+        MENUITEM "Simulation resume",           IDM_PROGRESS_RESUME
+        MENUITEM SEPARATOR
+        MENUITEM "Progress none",               IDM_PROGRESS_NONE
+        MENUITEM "Progress indeterminate",      IDM_PROGRESS_INDETERMINATE
+        MENUITEM "Progress normal",             IDM_PROGRESS_NORMAL
+        MENUITEM "Progress error",              IDM_PROGRESS_ERROR
+        MENUITEM "Progress paused",             IDM_PROGRESS_PAUSED
+
+    END
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "Taskbar status demo"
+END
