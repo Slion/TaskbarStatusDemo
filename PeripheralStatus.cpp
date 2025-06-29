@@ -14,7 +14,7 @@
 #pragma comment(linker, "\"/manifestdependency:type='Win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 #define MAX_PROGRESS_IND     50
-#define MAX_PROGRESS_NORMAL  300
+#define MAX_PROGRESS_NORMAL  200
 
 HINSTANCE g_hInstance = NULL;
 
@@ -131,7 +131,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                     }
                     break;
 
+                case IDM_FLASH_MINIMIZE:
+                    ShowWindow(hWnd, SW_MINIMIZE);
+                    FlashWindow(hWnd,true);
+                    break;
 
+                case IDM_FLASH_BACKGROUND:
+                    {
+                    //HWND next = GetWindow(hWnd, GW_HWNDNEXT);
+                    // Funny enough doing this keeps keyboard focus to this window and it is still returned by GetForegroundWindow
+                    // This state Windows 11 taskbar and Cairo both need two clicks to bring that window back to the foreground
+                    SetWindowPos(hWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+                    //                    
+                    //SetForegroundWindow(GetTopWindow(NULL));
+                    //SetForegroundWindow(next);
+                    //SetForegroundWindow(GetWindow(NULL, GW_HWNDFIRST));
+                    //SetWindowPos(GetTopWindow(NULL), HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+
+                    //PostMessage(next, WM_SYSCOMMAND, SC_RESTORE, 0);
+                    //SetForegroundWindow(GetLastActivePopup(next));
+
+                    FlashWindow(hWnd, true);
+                    }
+                    break;
 
                 case IDM_EXIT:
                     DestroyWindow(hWnd);
@@ -171,7 +193,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                     // Progress is done, stop the timer and reset progress state
                     KillTimer(hWnd, g_nTimerId);
                     g_nTimerId = 0;
-                    
+                    //FlashWindow(hWnd,true);
                     MessageBox(hWnd, L"Done!", L"Progress Complete", MB_OK);
                     g_pTaskbarList->SetProgressState(hWnd, TBPF_NOPROGRESS);
                 }

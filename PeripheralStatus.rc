@@ -25,7 +25,9 @@ BEGIN
         MENUITEM "Progress normal",             IDM_PROGRESS_NORMAL
         MENUITEM "Progress error",              IDM_PROGRESS_ERROR
         MENUITEM "Progress paused",             IDM_PROGRESS_PAUSED
-
+        MENUITEM SEPARATOR
+        MENUITEM "Flash minimize",              IDM_FLASH_MINIMIZE
+        MENUITEM "Flash background",            IDM_FLASH_BACKGROUND
     END
 END
 

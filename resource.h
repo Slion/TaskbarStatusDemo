@@ -17,5 +17,8 @@
 #define IDM_PROGRESS_NORMAL             40012
 #define IDM_PROGRESS_ERROR              40013
 #define IDM_PROGRESS_PAUSED             40014
+#define IDM_FLASH_MINIMIZE				40020
+#define IDM_FLASH_BACKGROUND			40021
+
 
 
