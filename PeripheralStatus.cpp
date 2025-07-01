@@ -64,30 +64,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             switch (wmId)
             {
                 case IDM_OVERLAY1:
-                case IDM_OVERLAY2:
-                case IDM_OVERLAY_CLEAR:
-                    if (g_pTaskbarList)
                     {
-                        // Choose which icon to set as the overlay
-                        HICON hIcon = NULL; // for IDM_OVERLAY_CLEAR
-                        if (wmId == IDM_OVERLAY1)
-                        {
-                            hIcon = LoadIcon(g_hInstance, MAKEINTRESOURCE(IDI_OVERLAY1));
-                        }
-                        else if (wmId == IDM_OVERLAY2)
-                        {
-                            hIcon = LoadIcon(g_hInstance, MAKEINTRESOURCE(IDI_OVERLAY2));
-                        }
-
-                        // Set the window's overlay icon, possibly NULL value
-                        g_pTaskbarList->SetOverlayIcon(hWnd, hIcon, NULL);
-
-                        if (hIcon)
-                        {
-                            // need to cleanup the icon as we no longer need it
-                            DestroyIcon(hIcon);
-                        }
+                    HICON icon = LoadIcon(g_hInstance, MAKEINTRESOURCE(IDI_OVERLAY1));
+                    g_pTaskbarList->SetOverlayIcon(hWnd, icon, L"Green");
+                    DestroyIcon(icon);
                     }
+                    break;
+
+                case IDM_OVERLAY2:
+                    {
+                    HICON icon = LoadIcon(g_hInstance, MAKEINTRESOURCE(IDI_OVERLAY2));
+                    g_pTaskbarList->SetOverlayIcon(hWnd, icon, L"Red");
+                    DestroyIcon(icon);
+                    }
+                    break;   
+
+                case IDM_OVERLAY_CLEAR:
+                    g_pTaskbarList->SetOverlayIcon(hWnd, 0, NULL);                                 
                     break;
 
                 case IDM_SIMULATEPROGRESS:
